@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!-- ========= Builds something ========= -->
+<project name="build_it" default="build_everything" basedir=".">
+
+	<property name="jarfile" location="file.jar" />
+
+	<property name="src.dir" value="src" />
+	<property name="build.dir" value="build" />
+
+	<target name="build_everything">
+
+		<delete dir="${build.dir}" />
+		<mkdir dir="${build.dir}" />
+
+		<!-- compile -->
+		<javac source="1.6" target="1.6" srcdir="${src.dir}" destdir="${build.dir}" />
+
+		<!-- copy icon -->
+		<copy todir="${build.dir}">
+			<fileset dir=".">
+				<include name="icon.png" />
+			</fileset>
+		</copy>
+
+		<!-- copy and rename web start jnlp file -->
+		<mkdir dir="${build.dir}/JNLP-INF" />
+		<copy todir="${build.dir}/JNLP-INF">
+			<fileset dir=".">
+				<include name="file.jnlp" />
+			</fileset>
+		</copy>
+		<move file="${build.dir}/JNLP-INF/file.jnlp" tofile="${build.dir}/JNLP-INF/APPLICATION.jnlp" />
+
+		<!-- make manifest -->
+		<manifest file="${build.dir}/MANIFEST.MF">
+			<attribute name="Class-Path" value="." />
+			<attribute name="Main-Class" value="my.class.MainClass" />
+		</manifest>
+
+		<!-- create the jar -->
+		<jar destfile="${jarfile}" basedir="${build.dir}" manifest="${build.dir}/MANIFEST.MF">
+			<exclude name="MANIFEST.MF" />
+		</jar>
+		
+		<!-- sign -->
+		<exec executable="jarsigner">
+			<arg value="-keystore" />
+			<arg value="fluxim_keys" />
+			<arg value="-storepass" />
+			<arg value="setfos" />
+			<arg value="-signedjar" />
+			<arg value="file.jar" />
+			<arg value="file.jar" />
+			<arg value="fluxim" />
+		</exec>
+
+	</target>
+</project>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<jnlp spec='1.0+' codebase='http://libgdx.googlecode.com/svn/jws/' href='hiero.jnlp'>
+<information>
+	<title>Hiero</title>
+	<vendor>Badlogic Games</vendor>
+	<homepage href='http://libgdx.googlecode.com/'/>
+	<description>Hiero</description>
+	<icon kind='splash' href='splash.jpg'/>
+</information>
+<security>
+	<all-permissions/>
+</security>
+<resources>
+	<j2se href='http://java.sun.com/products/autodl/j2se' version='1.5+' max-heap-size='128m'/>
+	<jar href='hiero.jar'/>
+</resources>
+<resources os="Windows">
+	<j2se href="http://java.sun.com/products/autodl/j2se" version="1.5+" max-heap-size="128m"/>
+	<nativelib href="natives-win.jar"/>
+</resources>
+<resources os="Linux">
+	<j2se href="http://java.sun.com/products/autodl/j2se" version="1.5+" max-heap-size="128m"/>
+	<nativelib href="natives-linux.jar"/>
+</resources>
+<resources os="Mac">
+	<j2se href="http://java.sun.com/products/autodl/j2se" version="1.5+" max-heap-size="128m"/>
+	<nativelib href="natives-mac.jar"/>
+</resources>
+<application-desc main-class='com.badlogic.gdx.hiero.Hiero'/>
+</jnlp>

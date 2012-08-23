@@ -1,0 +1,1 @@
+jarsigner -keystore my_keys -storepass setfos -signedjar file.jar file.jar brookman

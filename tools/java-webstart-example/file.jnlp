@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://32k.eu/ld24" href="file.jnlp">
+    <information>
+        <title>Ludum Dare 24</title>
+        <vendor>brookman32k</vendor>
+    </information>
+	
+    <resources>
+        <!-- Application Resources -->
+        <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+        <jar href="file.jar" main="true" />
+    </resources>
+	
+	<security>
+		<all-permissions/>
+	</security>
+    <application-desc
+         name="Ludum Dare 24"
+         main-class="eu32k.game.MainClass"
+         width="300"
+         height="200">
+     </application-desc>
+     <update check="background"/>
+</jnlp>

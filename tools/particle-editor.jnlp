@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<jnlp spec='1.0+' codebase='http://libgdx.googlecode.com/svn/jws/' href='particle-editor.jnlp'>
+<information>
+	<title>libgdx Particle Editor</title>
+	<vendor>libgdx</vendor>
+	<homepage href='http://libgdx.googlecode.com/'/>
+	<description>libgdx Particle Editor</description>
+	<description kind='short'>libgdx Particle Editor</description>
+	<icon kind='splash' href='splash.jpg'/>
+</information>
+<security>
+	<all-permissions/>
+</security>
+<resources>
+	<j2se href='http://java.sun.com/products/autodl/j2se' version='1.5+' max-heap-size='128m'/>
+	<jar href='gdx-tools.jar'/>
+	<jar href='gdx.jar'/>
+	<jar href='gdx-backend-lwjgl.jar'/>
+</resources>
+<resources os='Windows' arch="x86">
+	<j2se href='http://java.sun.com/products/autodl/j2se' version='1.5+' max-heap-size='128m'/>
+	<nativelib href='natives-win32.jar'/>
+</resources>
+<resources os='Windows' arch="x86_64">
+	<j2se href='http://java.sun.com/products/autodl/j2se' version='1.5+' max-heap-size='128m'/>
+	<nativelib href='natives-win64.jar'/>
+</resources>
+<resources os='Mac'>
+	<j2se href='http://java.sun.com/products/autodl/j2se' version='1.5+' max-heap-size='128m'/>
+	<nativelib href='natives-mac.jar'/>
+</resources>
+<resources os='Linux'>
+	<j2se href='http://java.sun.com/products/autodl/j2se' version='1.5+' max-heap-size='128m'/>
+	<nativelib href='natives-linux.jar'/>
+</resources>
+<application-desc main-class='com.badlogic.gdx.tools.particleeditor.ParticleEditor'/>
+</jnlp>
