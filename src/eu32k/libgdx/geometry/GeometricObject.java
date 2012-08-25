@@ -14,9 +14,9 @@ public class GeometricObject {
    private Mesh mesh;
    private Texture texture;
 
-   private Vector3 pos = new Vector3();
-   private Vector3 rot = new Vector3();
-   private Vector3 scale = new Vector3();
+   private Vector3 pos = new Vector3(0.0f, 0.0f, 0.0f);
+   private Vector3 rot = new Vector3(0.0f, 0.0f, 0.0f);
+   private Vector3 scale = new Vector3(1.0f, 1.0f, 1.0f);
 
    private boolean useLighting = true;
 

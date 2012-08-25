@@ -24,7 +24,7 @@ public class Mixer implements Disposable {
       this.renderer1 = renderer1;
       this.renderer2 = renderer2;
       quad = PrimitivesFactory.makeQuad(inverted);
-      shader = new ShaderProgram(Gdx.files.internal("data/simple.vsh").readString(), Gdx.files.internal("data/mixer.fsh").readString());
+      shader = new ShaderProgram(Gdx.files.internal("shaders/simple.vsh").readString(), Gdx.files.internal("shaders/mixer.fsh").readString());
       System.out.println(shader.getLog());
    }
 

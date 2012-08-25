@@ -42,14 +42,14 @@ public class Intro extends SimpleGame {
 
    @Override
    public void init() {
-      defaultShader = tag(new ShaderProgram(Gdx.files.internal("data/light.vsh").readString(), Gdx.files.internal("data/light.fsh").readString()));
+      defaultShader = tag(new ShaderProgram(Gdx.files.internal("shaders/light.vsh").readString(), Gdx.files.internal("shaders/light.fsh").readString()));
 
-      ShaderProgram simpleShader = tag(new ShaderProgram(Gdx.files.internal("data/simple.vsh").readString(), Gdx.files.internal("data/simple.fsh").readString()));
+      ShaderProgram simpleShader = tag(new ShaderProgram(Gdx.files.internal("shaders/simple.vsh").readString(), Gdx.files.internal("shaders/simple.fsh").readString()));
 
       normalRenderer = tag(new TextureRenderer(1920, 1080, simpleShader));
 
-      ShaderProgram verticalBlur = tag(new ShaderProgram(Gdx.files.internal("data/simple.vsh").readString(), Gdx.files.internal("data/blur_v.fsh").readString()));
-      ShaderProgram horizontalBlur = tag(new ShaderProgram(Gdx.files.internal("data/simple.vsh").readString(), Gdx.files.internal("data/blur_h.fsh").readString()));
+      ShaderProgram verticalBlur = tag(new ShaderProgram(Gdx.files.internal("shaders/simple.vsh").readString(), Gdx.files.internal("shaders/blur_v.fsh").readString()));
+      ShaderProgram horizontalBlur = tag(new ShaderProgram(Gdx.files.internal("shaders/simple.vsh").readString(), Gdx.files.internal("shaders/blur_h.fsh").readString()));
 
       List<Renderer> renderStack = new ArrayList<Renderer>();
       renderStack.add(tag(new TextureRenderer(512, 512, verticalBlur)));
@@ -60,9 +60,9 @@ public class Intro extends SimpleGame {
       mixer = tag(new Mixer(normalRenderer, blurRenderer, true));
 
       Mesh cubeMesh = tag(PrimitivesFactory.makeCube());
-      Texture cubeTexture = tag(new Texture(Gdx.files.internal("data/white.png"), true));
+      Texture cubeTexture = tag(new Texture(Gdx.files.internal("textures/white.png"), true));
 
-      animations = new AnimationBundle(Gdx.files.internal("data/cubes.ani"), 8);
+      animations = new AnimationBundle(Gdx.files.internal("animations/cubes.ani"), 8);
 
       for (int i = 0; i < animations.getNumberOfObjects() - 2; i++) {
          Cube cube = new Cube(defaultShader, cubeMesh, GL20.GL_TRIANGLES, cubeTexture);
@@ -93,6 +93,7 @@ public class Intro extends SimpleGame {
 
       Vector3 tempPos = animations.getPos(cubes.size());
       defaultShader.setUniformf("uPointLightingLocation", tempPos.x, tempPos.y, tempPos.z);
+      System.out.println(tempPos);
       defaultShader.setUniformMatrix("uPMatrix", camera.combined);
 
       for (Cube cube : cubes) {
@@ -123,23 +124,27 @@ public class Intro extends SimpleGame {
       camera.lookAt(0, 0, 0);
       camera.update();
 
-      // NORMAL -------------------------------------------------------------------------------
+      // NORMAL
+      // -------------------------------------------------------------------------------
       normalRenderer.begin();
       renderScene();
-      normalRenderer.end();
-      // NORMAL FINISHED ----------------------------------------------------------------------
+      normalRenderer.endAndRender();
+      // NORMAL FINISHED
+      // ----------------------------------------------------------------------
 
-      // BLUR ---------------------------------------------------------------------------------
-      blurRenderer.begin();
-      normalRenderer.render();
-      blurRenderer.end();
-      // BLUR FINISHED-------------------------------------------------------------------------
+      // BLUR
+      // ---------------------------------------------------------------------------------
+      // blurRenderer.begin();
+      // normalRenderer.render();
+      // blurRenderer.end();
+      // BLUR
+      // FINISHED-------------------------------------------------------------------------
 
-      float glowValue = (float) glow.getValue();
-      mixer.setFactor1(glowValue + 0.05f);
-      mixer.setFactor2(glowValue);
-      mixer.noise = (float) noise.getValue();
-
-      mixer.render();
+      // float glowValue = (float) glow.getValue();
+      // mixer.setFactor1(glowValue + 0.05f);
+      // mixer.setFactor2(glowValue);
+      // mixer.noise = (float) noise.getValue();
+      //
+      // mixer.render();
    }
 }

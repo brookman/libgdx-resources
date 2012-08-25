@@ -20,6 +20,30 @@ public class PrimitivesFactory {
       return quad;
    }
 
+   public static Mesh makeQuad2() {
+      Mesh quad = new Mesh(true, 3, 0, new VertexAttribute(Usage.Position, 3, ShaderProgram.POSITION_ATTRIBUTE), new VertexAttribute(Usage.TextureCoordinates, 2, ShaderProgram.TEXCOORD_ATTRIBUTE));
+      quad.setVertices(new float[] { 0.5f, 0.5f, 0f, 0f, 0f, 0.5f, -0.5f, 0f, 0f, 1f, -0.5f, -0.5f, 0f, 1f, 1f });
+      return quad;
+   }
+
+   public static Mesh QUAD = makeObjQuad();
+
+   public static Mesh makeObjQuad() {
+      String cubeObj = "" + //
+            "v -0.5 0.5 0.0\n" + //
+            "v 0.5 0.5 0.0\n" + //
+            "v -0.5 -0.5 0.0\n" + //
+            "v 0.5 -0.5 0.000000\n" + //
+            "vn 0.0 0.0 1.0\n" + //
+            "vt 0.0 1.0\n" + //
+            "vt 1.0 1.0\n" + //
+            "vt 1.0 0.0\n" + //
+            "vt 0.0 0.0\n" + //
+            "f 4/4/1 3/3/1 1/2/1\n" + //
+            "f 2/1/1 4/4/1 1/2/1\n";
+      return ObjLoader.loadObj(new ByteArrayInputStream(cubeObj.getBytes()), true, false);
+   }
+
    public static Mesh makeCube() {
       String cubeObj = "" + //
             "v -0.5 -0.5 -0.5\n" + //

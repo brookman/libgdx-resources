@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.utils.Disposable;
 
+import eu32k.libgdx.rendering.Textures;
+
 public abstract class SimpleGame implements ApplicationListener, InputProcessor {
 
    private List<Disposable> disposables = new ArrayList<Disposable>();
@@ -20,7 +22,7 @@ public abstract class SimpleGame implements ApplicationListener, InputProcessor 
       return disposable;
    }
 
-   protected float zoom = 1.0f;
+   private float zoom = 1.0f;
    protected boolean perspective;
    protected Camera camera;
 
@@ -46,12 +48,25 @@ public abstract class SimpleGame implements ApplicationListener, InputProcessor 
       draw(Gdx.graphics.getDeltaTime());
    }
 
+   public void resetCamera() {
+      camera = createCamera();
+   }
+
    public Camera createCamera() {
       if (perspective) {
          return new PerspectiveCamera(45, 2.0f * aspectRatio * zoom, 2.0f * zoom);
       } else {
          return new OrthographicCamera(2.0f * aspectRatio * zoom, 2.0f * zoom);
       }
+   }
+
+   public float getZoom() {
+      return zoom;
+   }
+
+   public void setZoom(float zoom) {
+      this.zoom = zoom;
+      resetCamera();
    }
 
    @Override
@@ -85,7 +100,7 @@ public abstract class SimpleGame implements ApplicationListener, InputProcessor 
    }
 
    @Override
-   public boolean touchMoved(int x, int y) {
+   public boolean mouseMoved(int screenX, int screenY) {
       return false;
    }
 
@@ -97,8 +112,7 @@ public abstract class SimpleGame implements ApplicationListener, InputProcessor 
    @Override
    public void resize(int width, int height) {
       aspectRatio = (float) width / (float) height;
-      camera = createCamera();
-      System.out.println(width + " " + height);
+      resetCamera();
    }
 
    @Override
@@ -114,5 +128,6 @@ public abstract class SimpleGame implements ApplicationListener, InputProcessor 
       for (Disposable disposable : disposables) {
          disposable.dispose();
       }
+      Textures.dispose();
    }
 }
