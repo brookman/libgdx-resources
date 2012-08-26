@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Disposable;
 
 import eu32k.libgdx.geometry.PrimitivesFactory;
+import eu32k.ludumdare.ld24.Time;
 
 public class Mixer implements Disposable {
 
@@ -44,6 +45,7 @@ public class Mixer implements Disposable {
       shader.setUniformf("uFactor1", factor1);
       shader.setUniformf("uFactor2", factor2);
       shader.setUniformf("uNoise", noise);
+      shader.setUniformf("uTime", Time.getTime());
 
       quad.render(shader, GL20.GL_TRIANGLE_FAN);
       shader.end();
